@@ -1,0 +1,7 @@
+::ng-deep .custom-carousel .p-carousel-item {
+  padding: 1rem;
+}
+
+::ng-deep .p-card {
+  height: 100%;
+}
