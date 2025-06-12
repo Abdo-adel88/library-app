@@ -5,3 +5,23 @@
 ::ng-deep .p-card {
   height: 100%;
 }
+::ng-deep .p-carousel .p-carousel-item {
+  border-radius: 8px;
+  padding: 0 !important;
+
+  margin-left: 5px;
+  color: #eeeeee;
+}
+
+/* ====== البطاقات ====== */
+::ng-deep .p-card {
+  background-color: #393e46;
+  color: #eeeeee;
+    border: 1px solid #00adb5;
+
+}
+
+::ng-deep .p-card .p-card-header {
+  font-weight: bold;
+  font-size: 1.1rem;
+}

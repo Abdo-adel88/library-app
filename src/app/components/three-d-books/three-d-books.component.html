@@ -1,0 +1,23 @@
+<div class="background-container">
+  <div class="overlay">
+    <div class="content">
+      <h2 class="section-title">Romance Books - 3D Style</h2>
+      <div class="carousel-track">
+       <ng-container *ngFor="let book of getVisibleBooks(); let i = index">
+  <div
+    *ngIf="book && book.cover_id"
+    class="book-card"
+    [ngClass]="getPositionClass(i)"
+  >
+    <img
+      [src]="'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'"
+      [alt]="book.title || 'Book Cover'"
+    />
+    <p class="author">{{ book.authors?.[0]?.name || 'Unknown' }}</p>
+  </div>
+</ng-container>
+
+      </div>
+    </div>
+  </div>
+</div>

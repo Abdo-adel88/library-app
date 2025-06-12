@@ -1,21 +1,18 @@
-<p-toast position="top-right"></p-toast>
-
-
 <!-- 💘 Romance Books -->
 <h2 class="my-3">Romance Books</h2>
 <p-carousel
   [value]="romanceBooks"
-  [numVisible]="4"
+  [numVisible]="5"
   [numScroll]="1"
   [circular]="true"
   [showNavigators]="true"
   [showIndicators]="false"
   [autoplayInterval]="2000"
   styleClass="custom-carousel"
-  [responsiveOptions]="responsiveOptions"
->
+  [responsiveOptions]="responsiveOptions">
+
   <ng-template pTemplate="item" let-book>
-    <div class="p-3">
+    <div class="">
       <p-card
         [header]="book.title?.split(' ').slice(0, 2).join(' ')"
         [subheader]="book.authors?.[0]?.name || 'Unknown Author'"
@@ -23,7 +20,9 @@
         <ng-template pTemplate="content">
           <img
             *ngIf="book.cover_id"
-            [src]="'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'"
+            [src]="
+              'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'
+            "
             alt="{{ book.title }}"
             class="mb-2 mx-auto"
             loading="lazy"
@@ -44,7 +43,7 @@
 <h2 class="my-3">Kids Books</h2>
 <p-carousel
   [value]="kidsBooks"
-  [numVisible]="4"
+  [numVisible]="5"
   [numScroll]="1"
   [circular]="true"
   [showNavigators]="true"
@@ -54,7 +53,7 @@
   [responsiveOptions]="responsiveOptions"
 >
   <ng-template pTemplate="item" let-book>
-    <div class="p-3">
+    <div class="">
       <p-card
         [header]="book.title?.split(' ').slice(0, 2).join(' ')"
         [subheader]="book.authors?.[0]?.name || 'Unknown Author'"
@@ -62,7 +61,9 @@
         <ng-template pTemplate="content">
           <img
             *ngIf="book.cover_id"
-            [src]="'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'"
+            [src]="
+              'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'
+            "
             alt="{{ book.title }}"
             class="mb-2 mx-auto"
             loading="lazy"
@@ -83,7 +84,7 @@
 <h2 class="my-3">Thriller Books</h2>
 <p-carousel
   [value]="thrillerBooks"
-  [numVisible]="4"
+  [numVisible]="5"
   [numScroll]="1"
   [circular]="true"
   [showNavigators]="true"
@@ -93,7 +94,7 @@
   [responsiveOptions]="responsiveOptions"
 >
   <ng-template pTemplate="item" let-book>
-    <div class="p-3">
+    <div class="">
       <p-card
         [header]="book.title?.split(' ').slice(0, 2).join(' ')"
         [subheader]="book.authors?.[0]?.name || 'Unknown Author'"
@@ -101,7 +102,9 @@
         <ng-template pTemplate="content">
           <img
             *ngIf="book.cover_id"
-            [src]="'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'"
+            [src]="
+              'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'
+            "
             alt="{{ book.title }}"
             class="mb-2 mx-auto"
             loading="lazy"

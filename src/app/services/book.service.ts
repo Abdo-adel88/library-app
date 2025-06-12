@@ -7,7 +7,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class BookService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    console.log();
+    
+  }
 
   searchBooks(query: string): Observable<any[]> {
     return this.http
@@ -27,5 +30,6 @@ export class BookService {
   }
     getBooksBySubject(subject: string, limit = 20) {
   return this.http.get(`https://openlibrary.org/subjects/${subject}.json?limit=${limit}`);
+
 }
 }

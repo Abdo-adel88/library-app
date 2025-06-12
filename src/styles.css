@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+/* ====== أساسيات عامّة ====== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #222831; /* خلفية داكنة */
+  color: #EEEEEE; /* لون النص الأساسي */
+}
+
+
+::ng-deep .p-button {
+  background-color: #00ADB5;
+  border: none;
+  color: #222831;
+}
+
+::ng-deep .p-button:hover {
+  background-color: #019aa2;
+  color: #fff;
+}
+
+h1, h2, h3 {
+  color: #00ADB5;
+  margin-top: 1rem;
+}

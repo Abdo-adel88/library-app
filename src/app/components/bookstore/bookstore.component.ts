@@ -23,6 +23,7 @@ import { CarouselModule } from 'primeng/carousel';
     RippleModule,
     CardModule,
     CarouselModule,
+    
   ],
   templateUrl: './bookstore.component.html',
   styleUrls: ['./bookstore.component.css'],
@@ -50,6 +51,7 @@ export class BookStoreComponent implements OnInit {
       { breakpoint: '768px', numVisible: 2, numScroll: 1 },
       { breakpoint: '560px', numVisible: 1, numScroll: 1 },
     ];
+    
   }
 
   fetchBooksByCategory(subject: string, target: keyof BookStoreComponent) {

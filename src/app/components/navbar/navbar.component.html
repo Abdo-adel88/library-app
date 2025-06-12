@@ -1,0 +1,23 @@
+<p-menubar [model]="items">
+  <ng-template pTemplate="start">
+    <div class="flex align-items-center ">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/29/29302.png"
+        alt="Logo"
+        width="40"
+        height="40"
+        style="margin-right: 1rem"
+      />
+      <span class="font-bold text-2xl text-white">BookStore</span>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="end">
+    <button
+      pButton
+      icon="pi pi-user"
+      class="p-button-rounded p-button-text"
+      aria-label="Profile"
+    ></button>
+  </ng-template>
+</p-menubar>

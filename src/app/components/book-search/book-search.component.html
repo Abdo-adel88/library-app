@@ -1,4 +1,4 @@
- <p-toast position="top-right"></p-toast>
+<p-toast position="top-right"></p-toast>
 
 <div class="p-inputgroup mb-4">
   <input
@@ -8,18 +8,13 @@
     (input)="onSearchInput($event)"
     style="width: 100%; max-width: 500px"
   />
-<button
-  pButton
-  icon="pi pi-search"
-  class="p-button-outlined p-button-secondary"
-  (click)="show()"
-></button>
-
+  <button
+    pButton
+    icon="pi pi-search"
+    class="p-button-outlined p-button-secondary"
+    (click)="show()"
+  ></button>
 </div>
-
-
-
-
 
 <div class="grid">
   <div
@@ -32,18 +27,19 @@
           *ngIf="book.cover"
           [src]="book.cover"
           alt="{{ book.title }}"
-          class="w-full mb-2  ng-star-inserted"
+          class="w-full mb-2 ng-star-inserted"
           loading="lazy"
-           width="300"
-  height="250"
+          width="300"
+          height="250"
           style="height: 250px; object-fit: cover"
         />
         <p class="text-sm text-gray-600">
           This is a book titled
-          <strong>{{ book.title.split(' ').slice(0, 2).join(' ') }}</strong> by
-          <strong>{{ book.author.split(' ').slice(0, 1).join(' ') }}</strong>.
+          <strong>{{ book.title.split(" ").slice(0, 2).join(" ") }}</strong> by
+          <strong>{{ book.author.split(" ").slice(0, 1).join(" ") }}</strong
+          >.
         </p>
       </ng-template>
     </p-card>
   </div>
-</div> 
+</div>
