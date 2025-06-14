@@ -33,6 +33,8 @@ export class BookStoreComponent implements OnInit {
   romanceBooks: any[] = [];
   kidsBooks: any[] = [];
   thrillerBooks: any[] = [];
+  allBooks: any[] = [];
+
   responsiveOptions: any[] = [];
 
   constructor(
@@ -46,12 +48,16 @@ export class BookStoreComponent implements OnInit {
     this.fetchBooksByCategory('children', 'kidsBooks');
     this.fetchBooksByCategory('thrillers', 'thrillerBooks');
 
+    this.bookService.getAllBooks(20).subscribe((books) => {
+      this.allBooks = books;
+      this.cdr.markForCheck();
+    });
+
     this.responsiveOptions = [
       { breakpoint: '1024px', numVisible: 3, numScroll: 1 },
       { breakpoint: '768px', numVisible: 2, numScroll: 1 },
       { breakpoint: '560px', numVisible: 1, numScroll: 1 },
     ];
-    
   }
 
   fetchBooksByCategory(subject: string, target: keyof BookStoreComponent) {
@@ -69,7 +75,6 @@ export class BookStoreComponent implements OnInit {
     });
   }
 
-  onBookSelect(event: any): void {
-    // optional: handle click
-  }
+  onBookSelect(event: any): void {}
 }
+

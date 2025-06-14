@@ -32,4 +32,18 @@ export class BookService {
   return this.http.get(`https://openlibrary.org/subjects/${subject}.json?limit=${limit}`);
 
 }
+getAllBooks(limit = 20): Observable<any[]> {
+  return this.http.get<any>(`https://openlibrary.org/subjects/fiction.json?limit=${limit}`).pipe(
+    map((res) =>
+      res.works.map((doc: any) => ({
+        title: doc.title,
+        author: doc.authors?.[0]?.name,
+        cover_id: doc.cover_id,
+        edition_count: doc.edition_count,
+      }))
+    )
+  );
+}
+
+
 }

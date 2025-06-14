@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
   items: MenuItem[] = [];
+  isScrolled: boolean = false;
 
   ngOnInit() {
     this.items = [
@@ -22,5 +23,9 @@ export class NavbarComponent {
       { label: 'Favorites', icon: 'pi pi-heart', routerLink: '/favorites' },
       { label: 'Contact', icon: 'pi pi-envelope', routerLink: '/contact' },
     ];
+  }
+    @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 0;
   }
 }

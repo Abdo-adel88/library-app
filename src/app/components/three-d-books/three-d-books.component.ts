@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../../services/book.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-three-d-books',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,NavbarComponent],
   templateUrl: './three-d-books.component.html',
   styleUrls: ['./three-d-books.component.css'],
 })
@@ -25,28 +26,30 @@ export class ThreeDBooksComponent implements OnInit {
     }, 3000);
   }
 
-  getVisibleBooks(): any[] {
-    if (this.romanceBooks.length === 0) return [];
+getVisibleBooks(): any[] {
+  if (this.romanceBooks.length < 5) return this.romanceBooks;
 
-    const result = [];
-    const total = this.romanceBooks.length;
+  const total = this.romanceBooks.length;
+  const result = [];
 
-    // Get 10 books: from activeIndex - 5 to activeIndex + 4
-    for (let i = -5; i <= 4; i++) {
-      const index = (this.activeIndex + i + total) % total;
-      result.push(this.romanceBooks[index]);
-    }
-
-    return result;
+  // فقط 5 كتب: far-left, left, center, right, far-right
+  for (let i = -2; i <= 2; i++) {
+    const index = (this.activeIndex + i + total) % total;
+    result.push(this.romanceBooks[index]);
   }
 
-  getPositionClass(index: number): string {
-    // This matches 10 items: index 0 to 9
-    if (index <= 3) return 'far-left';
-    if (index === 4) return 'left';
-    if (index === 5) return 'center';
-    if (index === 6) return 'right';
-    if (index >= 7) return 'far-right';
-    return 'hidden';
+  return result;
+}
+
+getPositionClass(index: number): string {
+  switch (index) {
+    case 0: return 'far-left';
+    case 1: return 'left';
+    case 2: return 'center';
+    case 3: return 'right';
+    case 4: return 'far-right';
+    default: return 'hidden';
   }
+}
+
 }
