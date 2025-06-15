@@ -1,161 +1,54 @@
-<!-- 📚 All Books -->
-<h2 class="my-3">All Books</h2>
-<p-carousel
-  [value]="allBooks"
-  [numVisible]="5"
-  [numScroll]="1"
-  [circular]="true"
-  [showNavigators]="true"
-  [showIndicators]="false"
-  [autoplayInterval]="2000"
-  styleClass="custom-carousel"
-  [responsiveOptions]="responsiveOptions">
+<h2 class="text-3xl font-bold text-center text-[#00ADB5] my-4">Explore All Books Here</h2>
 
-  <ng-template pTemplate="item" let-book>
-    <div>
-      <p-card
-        [header]="book.title?.split(' ').slice(0, 2).join(' ')"
-        [subheader]="book.author || 'Unknown Author'"
-      >
-        <ng-template pTemplate="content">
-          <img
-            *ngIf="book.cover_id"
-            [src]="'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'"
-            alt="{{ book.title }}"
-            class="mb-2 mx-auto"
-            loading="lazy"
-            width="200"
-            height="250"
-            style="object-fit: cover"
-          />
-          <p class="text-sm text-gray-600">
-            Editions: <strong>{{ book.edition_count }}</strong>
-          </p>
-        </ng-template>
-      </p-card>
-    </div>
-  </ng-template>
-</p-carousel>
+<div class="flex align-items-center justify-content-center flex-wrap gap-4 my-6">
+  <div class="flex items-center" *ngFor="let option of categoryOptions">
+    <p-radioButton
+      name="category"
+      [value]="option.value"
+      [(ngModel)]="selectedCategory"
+      [inputId]="option.value"
+      (onClick)="onCategoryChange(option.value)"
+    />
+    <label [for]="option.value" class="ml-2 lable ">
+      {{ option.label }}
+    </label>
+  </div>
+</div>
 
-<!-- 💘 Romance Books -->
-<h2 class="my-3">Romance Books</h2>
-<p-carousel
-  [value]="romanceBooks"
-  [numVisible]="5"
-  [numScroll]="1"
-  [circular]="true"
-  [showNavigators]="true"
-  [showIndicators]="false"
-  [autoplayInterval]="2000"
-  styleClass="custom-carousel"
-  [responsiveOptions]="responsiveOptions">
 
-  <ng-template pTemplate="item" let-book>
-    <div class="">
-      <p-card
-        [header]="book.title?.split(' ').slice(0, 2).join(' ')"
-        [subheader]="book.authors?.[0]?.name || 'Unknown Author'"
-      >
-        <ng-template pTemplate="content">
-          <img
-            *ngIf="book.cover_id"
-            [src]="
-              'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'
-            "
-            alt="{{ book.title }}"
-            class="mb-2 mx-auto"
-            loading="lazy"
-            width="200"
-            height="250"
-            style="object-fit: cover"
-          />
-          <p class="text-sm text-gray-600">
-            Editions: <strong>{{ book.edition_count }}</strong>
-          </p>
-        </ng-template>
-      </p-card>
-    </div>
-  </ng-template>
-</p-carousel>
+<div class="flex-wrap grid-cols-4 gap-6 flex align-items-center justify-content-center justify-center overflow-hidden">
+  <p-card
+    *ngFor="let book of displayedBooks"
+    [header]="getShortTitle(book.title)"
+    [subheader]="getShortAuthor(book)"
+    [style]="{ cursor: 'default', width: '300px', height: '470px' }"
+    [title]="book.title"
+  >
+    <ng-template pTemplate="content">
+      <img
+        *ngIf="book.cover_id"
+        [src]="'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'"
+        alt="{{ book.title }}"
+        class="img-cover"
+      />
+      <p class="text-sm">
+        Editions: <strong>{{ book.edition_count || '-' }}</strong>
+      </p>
+      <button
+        pButton
+        label="Add to favorites"
+        icon="pi pi-shopping-cart"
+        class="mt-2 w-full"
+      ></button>
+    </ng-template>
+  </p-card>
+</div>
 
-<!-- 👶 Kids Books -->
-<h2 class="my-3">Kids Books</h2>
-<p-carousel
-  [value]="kidsBooks"
-  [numVisible]="5"
-  [numScroll]="1"
-  [circular]="true"
-  [showNavigators]="true"
-  [showIndicators]="false"
-  [autoplayInterval]="2000"
-  styleClass="custom-carousel"
-  [responsiveOptions]="responsiveOptions"
->
-  <ng-template pTemplate="item" let-book>
-    <div class="">
-      <p-card
-        [header]="book.title?.split(' ').slice(0, 2).join(' ')"
-        [subheader]="book.authors?.[0]?.name || 'Unknown Author'"
-      >
-        <ng-template pTemplate="content">
-          <img
-            *ngIf="book.cover_id"
-            [src]="
-              'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'
-            "
-            alt="{{ book.title }}"
-            class="mb-2 mx-auto"
-            loading="lazy"
-            width="200"
-            height="250"
-            style="object-fit: cover"
-          />
-          <p class="text-sm text-gray-600">
-            Editions: <strong>{{ book.edition_count }}</strong>
-          </p>
-        </ng-template>
-      </p-card>
-    </div>
-  </ng-template>
-</p-carousel>
 
-<!-- 😱 Thriller Books -->
-<h2 class="my-3">Thriller Books</h2>
-<p-carousel
-  [value]="thrillerBooks"
-  [numVisible]="5"
-  [numScroll]="1"
-  [circular]="true"
-  [showNavigators]="true"
-  [showIndicators]="false"
-  [autoplayInterval]="2000"
-  styleClass="custom-carousel"
-  [responsiveOptions]="responsiveOptions"
->
-  <ng-template pTemplate="item" let-book>
-    <div class="">
-      <p-card
-        [header]="book.title?.split(' ').slice(0, 2).join(' ')"
-        [subheader]="book.authors?.[0]?.name || 'Unknown Author'"
-      >
-        <ng-template pTemplate="content">
-          <img
-            *ngIf="book.cover_id"
-            [src]="
-              'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'
-            "
-            alt="{{ book.title }}"
-            class="mb-2 mx-auto"
-            loading="lazy"
-            width="200"
-            height="250"
-            style="object-fit: cover"
-          />
-          <p class="text-sm text-gray-600">
-            Editions: <strong>{{ book.edition_count }}</strong>
-          </p>
-        </ng-template>
-      </p-card>
-    </div>
-  </ng-template>
-</p-carousel>
+
+<p-paginator
+  [rows]="rows"
+  [totalRecords]="totalRecords"
+  (onPageChange)="onPageChange($event)"
+  styleClass="mt-4"
+/>

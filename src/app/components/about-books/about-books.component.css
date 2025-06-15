@@ -1,0 +1,95 @@
+.about-section {
+  background-color: #000000; /* خلفية داكنة جدًا */
+  color: #f8f8f8;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 0;
+}
+
+.about-banner {
+  width: 100%;
+  height: 510px;
+  object-fit: cover;
+  display: block;
+}
+
+.about-content {
+  padding: 2rem 3rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.about-title {
+  font-size: 2rem;
+  font-weight: bold;
+ 
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #cc2b2b;
+  display: inline-block;
+}
+
+.about-description {
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  color: #e0e0e0;
+}
+
+.branches-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+ 
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.branches-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+
+.branch {
+  flex: 1 1 30%;
+  background-color: transparent;
+  border-left: 2px solid #cc2b2b;
+  padding-left: 1rem;
+}
+
+.branch h4 {
+  
+  margin-bottom: 0.5rem;
+}
+
+.branch p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #f0cfcf;
+}
+
+.commitment-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+   
+  margin-bottom: 1rem;
+}
+
+.commitment-description {
+  line-height: 1.7;
+  color: #dddddd;
+  font-size: 1rem;
+}
+h1, h2, h3 {
+  color: darkred !important; /* لون العناوين */
+}
+h4{
+    color: white !important; /* لون العناوين الفرعية */
+}
+.wave-top {
+
+  overflow: hidden;
+  margin-bottom: -13px; /* يزيل أي فجوة بين الموجة والبداية */
+}
+
+

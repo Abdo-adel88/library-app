@@ -1,0 +1,59 @@
+.h-fotter {
+  border-top: 2px solid darkred;
+  background-color: #000000;
+  padding: 30px 20px;
+  font-size: 14px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.footer-text {
+  margin: 10px 0;
+  font-weight: 400;
+}
+
+.footer-text a {
+  color: #00adb5;
+  text-decoration: none;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}
+
+.social-icons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icon {
+  color: darkred;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: white;
+}
+
+.footer-links {
+  margin-top: 15px;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.footer-links a {
+  color: #999;
+  margin: 0 10px;
+}
+
+.footer-links a:hover {
+  color: #00adb5;
+}
+.wave-top {
+
+  overflow: hidden;
+  margin-bottom: -13px; /* يزيل أي فجوة بين الموجة والبداية */
+}

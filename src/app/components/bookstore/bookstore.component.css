@@ -1,27 +1,51 @@
-::ng-deep .custom-carousel .p-carousel-item {
-  padding: 1rem;
-}
-
-::ng-deep .p-card {
-  height: 100%;
-}
-::ng-deep .p-carousel .p-carousel-item {
+:host ::ng-deep .p-card {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  padding: 0 !important;
-
-  margin-left: 5px;
-  color: #eeeeee;
+}
+h2 {
+  color: darkred;
 }
 
-/* ====== البطاقات ====== */
-::ng-deep .p-card {
-  background-color: #393e46;
-  color: #eeeeee;
-    border: 1px solid #00adb5;
-
+.text-sm {
+  color: #dcdcdc; /* رمادي فاتح */
 }
 
-::ng-deep .p-card .p-card-header {
+.p-card .p-card-header {
   font-weight: bold;
-  font-size: 1.1rem;
+  color: #00adb5;
+}
+
+.img-cover {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+::ng-deep .p-radiobutton-box.p-highlight {
+  background-color: darkred;
+  border-color: darkred;
+}
+::ng-deep .p-radiobutton .p-radiobutton-box:hover {
+  border-color: darkred;
+}
+
+::ng-deep .p-radiobutton-box {
+  border-radius: 50%;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+::ng-deep .p-button {
+ background-color: darkred;
+  color: #ffffff;
+  border-radius: 6px;
+  font-weight: bold;
+  border: none;
+}
+::ng-deep .p-button:hover {
+  background-color: rgb(214, 0, 0); /* لون أفتح عند التمرير */
+}
+.lable{
+  color: #000000;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
