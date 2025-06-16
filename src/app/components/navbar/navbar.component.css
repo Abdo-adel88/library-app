@@ -3,27 +3,24 @@
   padding: 0 1rem;
 }
 :host ::ng-deep .p-element {
- display: flex;
- align-items: center;
-   
-    margin-left: auto;
- 
-   
+  display: flex;
+  align-items: center;
+
+  margin-left: auto;
 }
 :host ::ng-deep .p-menubar-root-list {
-    margin-right: 120px;
+  margin-right: 120px;
 }
 :host ::ng-deep .p-element {
-   height: 60px;
+  height: 60px;
 }
 
 /* لون خلفية وخط */
 ::ng-deep .p-menubar {
-
   display: flex;
   align-items: center;
   justify-content: space-between;
- /* ارتفاع البار */
+  /* ارتفاع البار */
   z-index: 1000; /* لضمان ظهورها فوق العناصر الأخرى */
   background-color: #00000000;
   position: fixed; /* لون البار */
@@ -42,7 +39,7 @@
 }
 
 ::ng-deep .navbar-scrolled {
-z-index: 1000; /* لضمان ظهورها فوق العناصر الأخرى */
+  z-index: 1000; /* لضمان ظهورها فوق العناصر الأخرى */
   background-color: #00000022;
   position: fixed; /* لون البار */
   width: 100%;
@@ -53,8 +50,6 @@ z-index: 1000; /* لضمان ظهورها فوق العناصر الأخرى */
   padding: 0.5rem 1rem;
   transition: all 0.3s ease-in-out;
 }
-
-
 
 /* لوجو + اسم الموقع */
 .navbar-start {
@@ -76,7 +71,7 @@ z-index: 1000; /* لضمان ظهورها فوق العناصر الأخرى */
 }
 
 ::ng-deep .p-menubar .p-menuitem-text {
-  color: #EEEEEE ;
+  color: #eeeeee;
 }
 
 ::ng-deep .p-menubar .p-menuitem-link {
@@ -86,20 +81,26 @@ z-index: 1000; /* لضمان ظهورها فوق العناصر الأخرى */
   font-weight: 500;
 }
 ::ng-deep .p-menubar .p-menuitem-link:hover {
-    background-color: #00000009;
-height: 35px;
-    border-radius: 5px;
-    color: #000000 ;
+  background-color: #00000009;
+  height: 35px;
+  border-radius: 5px;
+  color: #000000;
   backdrop-filter: blur(3px); /* إضافة تأثير البلور */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-::ng-deep .p-menubar .p-menuitem-link:hover .p-menuitem-text{
- color: #000000 ;
+::ng-deep .p-menubar .p-menuitem-link:hover .p-menuitem-text {
+  color: #000000;
 }
+::ng-deep .p-menubar .p-menuitem-link:active .p-menuitem-text {
 
+ background-color: #00000009;
+  height: 35px;
+  border-radius: 5px;
+  color: #000000;
+  backdrop-filter: blur(3px); /* إضافة تأثير البلور */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);}
 
-
-.width-icon{
+.width-icon {
   width: 35px;
   height: 35px;
   display: flex;
@@ -108,5 +109,5 @@ height: 35px;
   border-radius: 50%;
   background-color: #ffffff93;
   margin-right: 20px;
-  cursor: pointer;;
+  cursor: pointer;
 }

@@ -44,6 +44,14 @@ getAllBooks(limit = 20): Observable<any[]> {
     )
   );
 }
+getBookDetails(workKey: string): Observable<any> {
+  return this.http.get(`https://openlibrary.org${workKey}.json`);
+}
+getAuthorDetails(authorKey: string): Observable<any> {
+  const cleanKey = authorKey.replace('/authors/', '');
+  return this.http.get(`https://openlibrary.org/authors/${cleanKey}.json`);
+}
+
 
 
 }

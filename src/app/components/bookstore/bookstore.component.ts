@@ -11,6 +11,8 @@ import { ButtonModule } from 'primeng/button';
 import { PaginatorModule } from 'primeng/paginator';
 import { FormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { DetailsBookComponent } from '../details-book/details-book.component';
+import { DialogModule } from 'primeng/dialog';
 @Component({
   selector: 'app-book-store',
   standalone: true,
@@ -21,6 +23,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     PaginatorModule,
     FormsModule,
      RadioButtonModule,
+     DialogModule,
+     DetailsBookComponent
   ],
   templateUrl: './bookstore.component.html',
   styleUrls: ['./bookstore.component.css'],
@@ -32,9 +36,12 @@ export class BookStoreComponent implements OnInit {
   romanceBooks: any[] = [];
   kidsBooks: any[] = [];
   thrillerBooks: any[] = [];
+selectedBook: any = null;
+showDetailsDialog: boolean = false;
 
   selectedCategory: string = 'all';
   displayedBooks: any[] = [];
+searchTerm: string = '';
 
   // Pagination
   page = 0;
@@ -71,21 +78,32 @@ fetchBooks(subject: string, target?: keyof BookStoreComponent): void {
 }
 
 
-  updateDisplayedBooks(): void {
-    const source =
-      this.selectedCategory === 'romance'
-        ? this.romanceBooks
-        : this.selectedCategory === 'kids'
-        ? this.kidsBooks
-        : this.selectedCategory === 'thrillers'
-        ? this.thrillerBooks
-        : this.allBooks;
+updateDisplayedBooks(): void {
+  let source =
+    this.selectedCategory === 'romance'
+      ? this.romanceBooks
+      : this.selectedCategory === 'kids'
+      ? this.kidsBooks
+      : this.selectedCategory === 'thrillers'
+      ? this.thrillerBooks
+      : this.allBooks;
 
-    this.totalRecords = source.length;
-    const start = this.page * this.rows;
-    const end = start + this.rows;
-    this.displayedBooks = source.slice(start, end);
+  // ✨ فلترة البحث
+  if (this.searchTerm.trim()) {
+    const term = this.searchTerm.trim().toLowerCase();
+    source = source.filter(book =>
+      book.title?.toLowerCase().includes(term) ||
+      book.authors?.[0]?.name?.toLowerCase().includes(term) ||
+      book.author?.toLowerCase().includes(term)
+    );
   }
+
+  this.totalRecords = source.length;
+  const start = this.page * this.rows;
+  const end = start + this.rows;
+  this.displayedBooks = source.slice(start, end);
+}
+
 
   onCategoryChange(category: string): void {
     this.selectedCategory = category;
@@ -109,5 +127,37 @@ getShortAuthor(book: any): string {
   const clean = author.trim().split(/\s+/).slice(0, 2).join(' ');
   return clean.length > 11 ? clean.slice(0, 11) + '...' : clean;
 }
+openBookDetails(book: any): void {
+  this.bookService.getBookDetails(book.key).subscribe((details) => {
+    const authorKey = details.authors?.[0]?.author?.key;
+
+    console.log('Book details:', details);
+    console.log('Author key:', authorKey);
+
+    this.selectedBook = { ...book, ...details };
+
+    if (authorKey) {
+      this.bookService.getAuthorDetails(authorKey).subscribe((author) => {
+        this.selectedBook.authorName = author?.name || 'Unknown';
+        this.showDetailsDialog = true;
+        this.cdr.markForCheck();
+      });
+    } else {
+      this.selectedBook.authorName = 'Unknown';
+      this.showDetailsDialog = true;
+      this.cdr.markForCheck();
+    }
+  });
+}
+
+
+
+loadAuthorName(authorKey: string): void {
+  this.bookService.getAuthorDetails(authorKey).subscribe((author: any) => {
+    this.selectedBook.authorName = author?.name || 'Unknown';
+    this.cdr.markForCheck(); // إذا كنت تستخدم ChangeDetectionStrategy.OnPush
+  });
+}
+
 
 }
