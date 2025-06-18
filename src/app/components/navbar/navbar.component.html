@@ -1,22 +1,44 @@
-<p-menubar [model]="items"   [ngClass]="{ 'navbar-default': !isScrolled, 'navbar-scrolled': isScrolled }">
+<p-menubar [ngClass]="{ 'navbar-default': !isScrolled, 'navbar-scrolled': isScrolled }">
   <ng-template pTemplate="start">
-    <div class="flex align-items-center ">
+    <div class="flex items-center gap-2">
       <img
         src="https://cdn-icons-png.flaticon.com/128/864/864702.png"
         alt="Logo"
         width="40"
         height="40"
-        style="margin-right: 1rem"
       />
       <span class="font-bold text-2xl text-white">BookStore</span>
+    </div>
+
+    <div class="nav-center-links">
+      <a class="custom-menu-link" (click)="scrollToSection('home')">
+        <i class="pi pi-home p-menuitem-icon"></i>
+        <span class="p-menuitem-text">Home</span>
+      </a>
+      <a class="custom-menu-link" (click)="scrollToSection('books')">
+        <i class="pi pi-book p-menuitem-icon"></i>
+        <span class="p-menuitem-text">Books</span>
+      </a>
+      <button class="custom-menu-link" (click)="onFavoritesClick()">
+        <i class="pi pi-heart p-menuitem-icon"></i>
+        <span class="p-menuitem-text">Favorites</span>
+      </button>
+     <a class="custom-menu-link" (click)="scrollToSection('about')">
+  <i class="pi pi-info-circle p-menuitem-icon"></i>
+  <span class="p-menuitem-text">About</span>
+</a>
+
+      <a class="custom-menu-link" (click)="scrollToSection('contact')">
+        <i class="pi pi-envelope p-menuitem-icon"></i>
+        <span class="p-menuitem-text">Contact</span>
+      </a>
+   
     </div>
   </ng-template>
 
   <ng-template pTemplate="end">
-<div class="flex align-items-center gap-2"> 
-    <div     
-      class="p-button-rounded p-button-text width-icon "
-      aria-label="Profile"><i class="pi pi-user"></i></div>
-  </div>
-    </ng-template>
+    <div class="width-icon" aria-label="Profile">
+      <i class="pi pi-user"></i>
+    </div>
+  </ng-template>
 </p-menubar>

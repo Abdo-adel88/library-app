@@ -1,8 +1,11 @@
 import {
   Component,
   OnInit,
-  ChangeDetectorRef,
   ChangeDetectionStrategy,
+  HostListener,
+  signal,
+  computed,
+  effect,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../../services/book.service';
@@ -13,6 +16,9 @@ import { FormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DetailsBookComponent } from '../details-book/details-book.component';
 import { DialogModule } from 'primeng/dialog';
+import { MessageService } from 'primeng/api';
+import { FavoritesBookComponent } from '../favorites-book/favorites-book.component';
+
 @Component({
   selector: 'app-book-store',
   standalone: true,
@@ -22,142 +28,186 @@ import { DialogModule } from 'primeng/dialog';
     ButtonModule,
     PaginatorModule,
     FormsModule,
-     RadioButtonModule,
-     DialogModule,
-     DetailsBookComponent
+    RadioButtonModule,
+    DialogModule,
+    DetailsBookComponent,
+    FavoritesBookComponent,
   ],
   templateUrl: './bookstore.component.html',
   styleUrls: ['./bookstore.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookStoreComponent implements OnInit {
-  [key: string]: any; // Add index signature to allow dynamic property assignment
-  allBooks: any[] = [];
-  romanceBooks: any[] = [];
-  kidsBooks: any[] = [];
-  thrillerBooks: any[] = [];
-selectedBook: any = null;
-showDetailsDialog: boolean = false;
+  allBooks = signal<any[]>([]);
+  romanceBooks = signal<any[]>([]);
+  kidsBooks = signal<any[]>([]);
+  thrillerBooks = signal<any[]>([]);
 
-  selectedCategory: string = 'all';
-  displayedBooks: any[] = [];
-searchTerm: string = '';
+  selectedBook = signal<any | null>(null);
+  showDetailsDialog = signal(false);
+  selectedCategory = signal('all');
+  searchTerm = signal('');
+  showFavoritesDialog = signal(false);
+  page = signal(0);
+  rows = signal(8);
+  yourFavoritesList = signal<any[]>([]);
 
-  // Pagination
-  page = 0;
-  rows = 8;
-  totalRecords = 0;
-categoryOptions = [
-  { label: 'All', value: 'all' },
-  { label: 'Romance', value: 'romance' },
-  { label: 'Kids', value: 'kids' },
-  { label: 'Thrillers', value: 'thrillers' },
-];
+  // ✅ computed
+  totalRecords = computed(() => this.filteredBooks().length);
+  displayedBooks = computed(() => {
+    const start = this.page() * this.rows();
+    return this.filteredBooks().slice(start, start + this.rows());
+  });
+
+  categoryOptions = [
+    { label: 'All', value: 'all' },
+    { label: 'Romance', value: 'romance' },
+    { label: 'Kids', value: 'kids' },
+    { label: 'Thrillers', value: 'thrillers' },
+  ];
 
   constructor(
     private bookService: BookService,
-    private cdr: ChangeDetectorRef
+    private messageService: MessageService
   ) {}
 
-ngOnInit(): void {
-  this.fetchBooks('romance'); // default category
-  this.fetchBooks('children_stories', 'kidsBooks');
-  this.fetchBooks('suspense', 'thrillerBooks');
-  this.fetchBooks('fiction', 'allBooks');
-}
+  ngOnInit(): void {
+    this.fetchBooks('romance', this.romanceBooks);
+    this.fetchBooks('children_stories', this.kidsBooks);
+    this.fetchBooks('suspense', this.thrillerBooks);
+    this.fetchBooks('fiction', this.allBooks);
+this.selectedCategory.set('all');
 
+  }
 
-fetchBooks(subject: string, target?: keyof BookStoreComponent): void {
-  const key = target || (subject + 'Books') as keyof BookStoreComponent;
-
+fetchBooks(subject: string, signalTarget: any, callback?: () => void): void {
   this.bookService.getBooksBySubject(subject, 40).subscribe((res: any) => {
-    this[key] = res.works;
-    this.updateDisplayedBooks();
-    this.cdr.markForCheck();
+    signalTarget.set(res.works);
+    if (callback) callback();
   });
 }
 
 
-updateDisplayedBooks(): void {
-  let source =
-    this.selectedCategory === 'romance'
-      ? this.romanceBooks
-      : this.selectedCategory === 'kids'
-      ? this.kidsBooks
-      : this.selectedCategory === 'thrillers'
-      ? this.thrillerBooks
-      : this.allBooks;
+  filteredBooks = computed(() => {
+    const category = this.selectedCategory();
+    const term = this.searchTerm().trim().toLowerCase();
 
-  // ✨ فلترة البحث
-  if (this.searchTerm.trim()) {
-    const term = this.searchTerm.trim().toLowerCase();
-    source = source.filter(book =>
-      book.title?.toLowerCase().includes(term) ||
-      book.authors?.[0]?.name?.toLowerCase().includes(term) ||
-      book.author?.toLowerCase().includes(term)
-    );
-  }
+    let source =
+      category === 'romance'
+        ? this.romanceBooks()
+        : category === 'kids'
+        ? this.kidsBooks()
+        : category === 'thrillers'
+        ? this.thrillerBooks()
+        : this.allBooks();
 
-  this.totalRecords = source.length;
-  const start = this.page * this.rows;
-  const end = start + this.rows;
-  this.displayedBooks = source.slice(start, end);
-}
+    if (term) {
+      source = source.filter(
+        (book) =>
+          book.title?.toLowerCase().includes(term) ||
+          book.authors?.[0]?.name?.toLowerCase().includes(term) ||
+          book.author?.toLowerCase().includes(term)
+      );
+    }
 
+    return source;
+  });
 
   onCategoryChange(category: string): void {
-    this.selectedCategory = category;
-    this.page = 0;
-    this.updateDisplayedBooks();
+    this.selectedCategory.set(category);
+    this.page.set(0);
   }
 
   onPageChange(event: any): void {
-    this.page = event.page;
-    this.rows = event.rows;
-    this.updateDisplayedBooks();
+    this.page.set(event.page);
+    this.rows.set(event.rows);
   }
+
   getShortTitle(title: string): string {
-  if (!title) return 'Untitled';
-  const clean = title.trim().split(/\s+/).slice(0, 2).join(' ');
-  return clean.length > 11 ? clean.slice(0, 11) + '...' : clean;
-}
+    if (!title) return 'Untitled';
+    const clean = title.trim().split(/\s+/).slice(0, 2).join(' ');
+    return clean.length > 11 ? clean.slice(0, 11) + '...' : clean;
+  }
 
-getShortAuthor(book: any): string {
-  const author = book.authors?.[0]?.name || book.author || 'Unknown Author';
-  const clean = author.trim().split(/\s+/).slice(0, 2).join(' ');
-  return clean.length > 11 ? clean.slice(0, 11) + '...' : clean;
-}
-openBookDetails(book: any): void {
-  this.bookService.getBookDetails(book.key).subscribe((details) => {
-    const authorKey = details.authors?.[0]?.author?.key;
+  getShortAuthor(book: any): string {
+    const author = book.authors?.[0]?.name || book.author || 'Unknown Author';
+    const clean = author.trim().split(/\s+/).slice(0, 2).join(' ');
+    return clean.length > 11 ? clean.slice(0, 11) + '...' : clean;
+  }
 
-    console.log('Book details:', details);
-    console.log('Author key:', authorKey);
+  openBookDetails(book: any): void {
+    this.bookService.getBookDetails(book.key).subscribe((details) => {
+      const authorKey = details.authors?.[0]?.author?.key;
+      const fullBook = { ...book, ...details };
 
-    this.selectedBook = { ...book, ...details };
+      if (authorKey) {
+        this.bookService.getAuthorDetails(authorKey).subscribe((author) => {
+          fullBook.authorName = author?.name || 'Unknown';
+          this.selectedBook.set(fullBook);
+          this.showDetailsDialog.set(true);
+        });
+      } else {
+        fullBook.authorName = 'Unknown';
+        this.selectedBook.set(fullBook);
+        this.showDetailsDialog.set(true);
+      }
+    });
+  }
 
-    if (authorKey) {
-      this.bookService.getAuthorDetails(authorKey).subscribe((author) => {
-        this.selectedBook.authorName = author?.name || 'Unknown';
-        this.showDetailsDialog = true;
-        this.cdr.markForCheck();
+  addToFavorites(book: any) {
+    if (book.authorName) {
+      this.pushToFavorites(book);
+    } else {
+      const authorKey =
+        book.authors?.[0]?.author?.key || book.authors?.[0]?.key;
+
+      if (authorKey) {
+        this.bookService.getAuthorDetails(authorKey).subscribe((author) => {
+          book.authorName = author?.name || 'Unknown';
+          this.pushToFavorites(book);
+        });
+      } else {
+        book.authorName = 'Unknown';
+        this.pushToFavorites(book);
+      }
+    }
+  }
+
+  pushToFavorites(book: any) {
+    const exists = this.yourFavoritesList().some((b) => b.key === book.key);
+    if (!exists) {
+      this.yourFavoritesList.update((list) => [...list, book]);
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Added to Favorites',
+        detail: book.title,
       });
     } else {
-      this.selectedBook.authorName = 'Unknown';
-      this.showDetailsDialog = true;
-      this.cdr.markForCheck();
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Already in Favorites',
+        detail: book.title,
+      });
     }
-  });
-}
+  }
 
+  removeFromFavorites(book: any) {
+    this.yourFavoritesList.update((list) =>
+      list.filter((b) => b.key !== book.key)
+    );
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Removed from Favorites',
+      detail: book.title,
+    });
+  }
 
+  isInFavorites(book: any): boolean {
+    return this.yourFavoritesList().some((b) => b.key === book.key);
+  }
 
-loadAuthorName(authorKey: string): void {
-  this.bookService.getAuthorDetails(authorKey).subscribe((author: any) => {
-    this.selectedBook.authorName = author?.name || 'Unknown';
-    this.cdr.markForCheck(); // إذا كنت تستخدم ChangeDetectionStrategy.OnPush
-  });
-}
-
-
+  @HostListener('window:open-favorites-dialog', [])
+  openFavoritesFromNavbar() {
+    this.showFavoritesDialog.set(true);
+  }
 }

@@ -3,84 +3,107 @@
 </h2>
 
 <div class="flex justify-content-center flex-wrap items-center gap-4 mt-6 mb-3">
-  <div class="flex items-center" *ngFor="let option of categoryOptions">
-    <p-radioButton
-      name="category"
-      [value]="option.value"
-      [(ngModel)]="selectedCategory"
-      [inputId]="option.value"
-      (onClick)="onCategoryChange(option.value)"
-    />
-    <label [for]="option.value" class="ml-2 lable">
-      {{ option.label }}
-    </label>
-  </div>
+  @for (option of categoryOptions; track option.value) {
+    <div class="flex items-center">
+      <p-radioButton
+        name="category"
+        [value]="option.value"
+        [(ngModel)]="selectedCategory"
+        [inputId]="option.value"
+        (onClick)="onCategoryChange(option.value)"
+      />
+      <label [for]="option.value" class="ml-2 lable">
+        {{ option.label }}
+      </label>
+    </div>
+  }
 </div>
+
 <div class="flex justify-content-center flex-wrap items-center w-input mb-3">
   <input
     type="text"
     [(ngModel)]="searchTerm"
-    (input)="updateDisplayedBooks()"
     placeholder="Search books..."
     class="search-input"
   />
 </div>
 
-<div
-  class="flex-wrap grid-cols-4 gap-6 flex align-items-center justify-content-center justify-center overflow-hidden"
->
-  <div
-  class="cursor-pointer"
-  *ngFor="let book of displayedBooks"
-  (click)="openBookDetails(book)"
->
-  <p-card
-    [header]="getShortTitle(book.title)"
-    [subheader]="getShortAuthor(book)"
-    [style]="{  width: '300px', height: '470px' }"
-    [title]="book.title"
-    class="cursor-pointer"
-  >
-    <ng-template pTemplate="content">
+<div class="flex-wrap grid-cols-4 gap-6 flex align-items-center justify-content-center overflow-hidden">
+  @for (book of displayedBooks(); track book?.key) {
+    <div class="cursor-pointer" (click)="openBookDetails(book)">
+      <p-card
+        [header]="getShortTitle(book.title)"
+        [subheader]="getShortAuthor(book)"
+        [style]="{ width: '300px', height: '470px' }"
+        [title]="book.title"
+        class="cursor-pointer"
+      >
+        <ng-template pTemplate="content">
+          @if (book.cover_id) {
+            <img
+              [src]="'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'"
+              alt="{{ book.title }}"
+              class="img-cover"
+            />
+          }
+
+          <p class="text-sm text-black-alpha-50">
+            Editions: <strong>{{ book.edition_count || '-' }}</strong>
+          </p>
+
+          <button
+            pButton
+            [label]="isInFavorites(book) ? 'You added this book' : 'Add to favorites'"
+            icon="pi pi-heart"
+            class="mt-2 w-full"
+            [disabled]="isInFavorites(book)"
+            (click)="addToFavorites(book); $event.stopPropagation()"
+          ></button>
+        </ng-template>
+      </p-card>
+    </div>
+  }
+
+  @if (displayedBooks().length === 0) {
+    <div class="text-center my-8 col-span-full">
+      <h3 class="text-2xl font-bold text-[#cc0000] mb-4">No books found</h3>
       <img
-        *ngIf="book.cover_id"
-        [src]="'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'"
-        alt="{{ book.title }}"
-        class="img-cover"
+        src="https://img.freepik.com/free-vector/error-404-concept-illustration_114360-1811.jpg?ga=GA1.1.356167453.1722170400&semt=ais_hybrid&w=740"
+        alt="Not Found"
+        class="max-w-[350px] mx-auto rounded-lg shadow-lg"
       />
-      <p class="text-sm text-black-alpha-50">
-        Editions: <strong>{{ book.edition_count || '-' }}</strong>
-      </p>
-      <button
-        pButton
-        label="Add to favorites"
-        icon="pi pi-shopping-cart"
-        class="mt-2 w-full"
-        (click)="$event.stopPropagation()" 
-      ></button>
-    </ng-template>
-  </p-card>
-</div>
-
-  <!-- ✅ NO RESULTS FOUND MESSAGE -->
-<div *ngIf="displayedBooks.length === 0" class="text-center my-8">
-  <h3 class="text-2xl font-bold text-[#cc0000] mb-4">No books found</h3>
-  <img
-    src="https://img.freepik.com/free-vector/error-404-concept-illustration_114360-1811.jpg?ga=GA1.1.356167453.1722170400&semt=ais_hybrid&w=740"
-    alt="Not Found"
-    class="max-w-[350px] mx-auto rounded-lg shadow-lg"
-  />
-</div>
-
+    </div>
+  }
 </div>
 
 <p-paginator
-  [rows]="rows"
-  [totalRecords]="totalRecords"
+  [rows]="rows()"
+  [totalRecords]="totalRecords()"
   (onPageChange)="onPageChange($event)"
- *ngIf="displayedBooks.length > 0"
+  *ngIf="totalRecords() > 0"
   styleClass="mt-4"
 />
-<p-dialog [(visible)]="showDetailsDialog" modal header="Book Details" [style]="{ width: '800px' }" [dismissableMask]="true">
-  <app-details-book *ngIf="selectedBook" [book]="selectedBook" />
+
+<p-dialog
+  [(visible)]="showDetailsDialog"
+  modal
+  header="Book Details"
+  [style]="{ width: '800px' }"
+  [dismissableMask]="true"
+>
+  <app-details-book *ngIf="selectedBook()" [book]="selectedBook()" />
+</p-dialog>
+
+<p-dialog
+  [(visible)]="showFavoritesDialog"
+  modal
+  header="Favorites"
+  [dismissableMask]="true"
+  [style]="{ width: '800px' }"
+>
+  <app-favorites-book
+    [favoriteBooks]="yourFavoritesList()"
+    (remove)="removeFromFavorites($event)"
+    (openDetails)="openBookDetails($event)"
+  />
 </p-dialog>

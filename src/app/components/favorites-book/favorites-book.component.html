@@ -1,0 +1,60 @@
+@if (favoriteBooks.length > 0) {
+  <h2 class="text-2xl font-bold text-center text-[#00ADB5] mb-6">
+    Your Favorite Books
+  </h2>
+}
+
+<div class="flex-wrap flex align-items-center justify-content-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 px-2">
+  @if (favoriteBooks.length > 0) {
+    @for (book of favoriteBooks; track book?.key) {
+      <div
+        (click)="triggerOpenDetails(book)"
+        class="cursor-pointer"
+      >
+        <p-card
+          [header]="book.title?.split(' ').slice(0, 1).join(' ')"
+          [subheader]="book.authorName || book.author || 'Unknown Author'"
+          [style]="{ width: '210px', height: '450px' }"
+        >
+          <ng-template pTemplate="content">
+            @if (book.cover_id) {
+              <img
+                [src]="'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'"
+                alt="{{ book.title }}"
+                class="img-cover mb-2"
+                style="width: 100%; height: 220px; object-fit: cover; border-radius: 6px;"
+              />
+            }
+
+            <p class="text-sm text-gray-400">
+              Editions: <strong>{{ book.edition_count || '-' }}</strong>
+            </p>
+
+            <button
+              pButton
+              label="Remove"
+              icon="pi pi-trash"
+              class="mt-3 w-full p-button-sm p-button-danger"
+              (click)="triggerRemove(book); $event.stopPropagation()"
+            ></button>
+          </ng-template>
+        </p-card>
+      </div>
+    }
+  } @else {
+    <div class="text-center flex align-items-center justify-content-center flex-column my-10 col-span-full">
+      <h3 class="text-xl font-bold text-[#cc0000]">No favorites added</h3>
+      <p class="text-[#EEEEEE] text-sm">
+        You haven't added any books to your favorites yet.
+        <br />
+        Go back and explore some titles 📚
+      </p>
+      <img
+        src="https://img.freepik.com/free-vector/error-404-concept-illustration_114360-1811.jpg"
+        alt="No Favorites"
+        class="max-w-[260px] mx-auto rounded-lg shadow-lg mb-4"
+        [height]="290"
+      />
+    </div>
+  }
+</div>

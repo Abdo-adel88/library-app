@@ -20,12 +20,31 @@ export class NavbarComponent {
     this.items = [
       { label: 'Home', icon: 'pi pi-home', routerLink: '/' },
       { label: 'Books', icon: 'pi pi-book', routerLink: '/books' },
-      { label: 'Favorites', icon: 'pi pi-heart', routerLink: '/favorites' },
+      {
+        label: 'Favorites',
+        icon: 'pi pi-heart',
+        command: () => {
+          this.onFavoritesClick();
+        },
+      },
       { label: 'Contact', icon: 'pi pi-envelope', routerLink: '/contact' },
     ];
   }
-    @HostListener('window:scroll', [])
+  @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isScrolled = window.scrollY > 0;
   }
+  onFavoritesClick() {
+    const event = new CustomEvent('open-favorites-dialog');
+    window.dispatchEvent(event);
+  }
+
+scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+
 }
