@@ -41,6 +41,7 @@
 .nav-center-links {
   display: flex;
   gap: 1rem;
+   margin-right: 110px;
 }
 
 .nav-center-links a,
@@ -93,6 +94,7 @@
 
   .nav-center-links.show {
     display: flex;
+    margin: auto;
   }
 
   /* ✅ أخفي أيقونة البروفايل */
