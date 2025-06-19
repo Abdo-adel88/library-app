@@ -93,3 +93,88 @@ h4{
 }
 
 
+/* 🌐 Responsive Design */
+
+/* 🔶 Tablet - max-width: 768px */
+@media (max-width: 768px) {
+  .about-banner {
+    height: 380px;
+  }
+
+  .about-content {
+    padding: 2rem 3rem;
+  }
+
+  .branches-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .branch {
+    flex: 1 1 100%;
+    padding-left: 0.5rem;
+    border-left: 3px solid #cc2b2b;
+  }
+
+  .about-title,
+  .branches-title,
+  .commitment-title {
+    font-size: 1.6rem;
+  }
+
+  .about-description,
+  .commitment-description {
+    font-size: 0.95rem;
+  }
+}
+
+/* 🔹 Mobile - max-width: 425px */
+@media (max-width: 425px) {
+  .about-banner {
+    height: 280px;
+  }
+
+  .about-heading {
+    font-size: 1.5rem;
+  }
+
+  .about-subheading {
+    font-size: 1rem;
+  }
+
+  .about-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .about-title,
+  .branches-title,
+  .commitment-title {
+    font-size: 1.3rem;
+  }
+
+  .about-description,
+  .commitment-description,
+  .branch p {
+    font-size: 0.9rem;
+  }
+}
+
+/* 🔸 Mobile Small - max-width: 375px */
+@media (max-width: 375px) {
+  .about-banner {
+    height: 240px;
+  }
+
+  .about-title,
+  .branches-title,
+  .commitment-title {
+    font-size: 1.2rem;
+  }
+
+  .about-description,
+  .commitment-description,
+  .branch p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+}

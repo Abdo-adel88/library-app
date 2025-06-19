@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 
 @Component({
   selector: 'app-details-book',
@@ -10,4 +10,18 @@ import { Component, Input } from '@angular/core';
 })
 export class DetailsBookComponent {
   @Input() book: any;
+    isMobileView = false;
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkViewport();
+  }
+
+  ngOnInit() {
+    this.checkViewport();
+  }
+
+  checkViewport() {
+    this.isMobileView = window.innerWidth <= 428;
+  }
 }

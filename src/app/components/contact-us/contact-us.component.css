@@ -91,3 +91,94 @@
   overflow: hidden;
   margin-bottom: -13px; /* يزيل أي فجوة بين الموجة والبداية */
 }
+/* 🔶 Tablet (768px) */
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 20px;
+  }
+
+  .contact-animation {
+    order: 2;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .contact-animation dotlottie-player {
+    width: 350px !important;
+    height: 350px !important;
+  }
+
+  .contact-form {
+    order: 1;
+    width: 100%;
+    text-align: center;
+  }
+
+  .contact-form h2 {
+    font-size: 2rem;
+  }
+
+  .contact-form h3 {
+    font-size: 1.2rem;
+  }
+}
+
+/* 🔹 Mobile (max-width: 425px) */
+@media (max-width: 425px) {
+  .contact-form h2 {
+    font-size: 1.7rem;
+  }
+
+  .contact-form h3 {
+    font-size: 1rem;
+  }
+
+  .contact-form p {
+    font-size: 0.9rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 0.85rem;
+  }
+
+  .contact-form button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .contact-animation dotlottie-player {
+    width: 280px !important;
+    height: 280px !important;
+  }
+}
+
+/* 🔸 Mobile small (375px) */
+@media (max-width: 375px) {
+  .contact-form h2 {
+    font-size: 1.5rem;
+  }
+
+  .contact-form h3 {
+    font-size: 0.95rem;
+  }
+
+  .contact-form p {
+    font-size: 0.85rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 0.8rem;
+    padding: 10px;
+  }
+
+  .contact-form button {
+    font-size: 0.85rem;
+  }
+
+  .contact-animation dotlottie-player {
+    width: 240px !important;
+    height: 240px !important;
+  }
+}

@@ -1,0 +1,16 @@
+.book-details-wrapper {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.h-300{
+    height: 400px;
+    width: 200px;
+}
+::ng-deep .p-dialog-header{
+    width: 100% !important;
+}
+::ng-deep .p-ripple{
+    width: 30px !important;
+}

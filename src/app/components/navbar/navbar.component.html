@@ -1,44 +1,29 @@
-<p-menubar [ngClass]="{ 'navbar-default': !isScrolled, 'navbar-scrolled': isScrolled }">
-  <ng-template pTemplate="start">
-    <div class="flex items-center gap-2">
-      <img
-        src="https://cdn-icons-png.flaticon.com/128/864/864702.png"
-        alt="Logo"
-        width="40"
-        height="40"
-      />
-      <span class="font-bold text-2xl text-white">BookStore</span>
-    </div>
+<nav class="custom-navbar" [class.navbar-scrolled]="isScrolled">
+  <div class="navbar-left">
+    <img
+      src="https://cdn-icons-png.flaticon.com/128/864/864702.png"
+      alt="Logo"
+      width="40"
+      height="40"
+    />
+    <span class="brand">BookStore</span>
+  </div>
 
-    <div class="nav-center-links">
-      <a class="custom-menu-link" (click)="scrollToSection('home')">
-        <i class="pi pi-home p-menuitem-icon"></i>
-        <span class="p-menuitem-text">Home</span>
-      </a>
-      <a class="custom-menu-link" (click)="scrollToSection('books')">
-        <i class="pi pi-book p-menuitem-icon"></i>
-        <span class="p-menuitem-text">Books</span>
-      </a>
-      <button class="custom-menu-link" (click)="onFavoritesClick()">
-        <i class="pi pi-heart p-menuitem-icon"></i>
-        <span class="p-menuitem-text">Favorites</span>
-      </button>
-     <a class="custom-menu-link" (click)="scrollToSection('about')">
-  <i class="pi pi-info-circle p-menuitem-icon"></i>
-  <span class="p-menuitem-text">About</span>
-</a>
+  <div class="nav-center-links" [class.show]="isMenuOpen">
+    <a class="custom-menu-link" (click)="scrollToSection('home')">Home</a>
+    <a class="custom-menu-link" (click)="scrollToSection('books')">Books</a>
+    <button class="custom-menu-link" (click)="onFavoritesClick()">Favorites</button>
+    <a class="custom-menu-link" (click)="scrollToSection('about')">About</a>
+    <a class="custom-menu-link" (click)="scrollToSection('contact')">Contact</a>
+  </div>
 
-      <a class="custom-menu-link" (click)="scrollToSection('contact')">
-        <i class="pi pi-envelope p-menuitem-icon"></i>
-        <span class="p-menuitem-text">Contact</span>
-      </a>
-   
-    </div>
-  </ng-template>
+  <!-- ✅ Profile icon -->
+  <div class="width-icon" aria-label="Profile">
+    <i class="pi pi-user"></i>
+  </div>
 
-  <ng-template pTemplate="end">
-    <div class="width-icon" aria-label="Profile">
-      <i class="pi pi-user"></i>
-    </div>
-  </ng-template>
-</p-menubar>
+  <!-- ✅ Toggle button يظهر في الموبايل بدل الأيقونة -->
+  <button class="menu-toggle" (click)="toggleMenu()">
+    <i class="pi pi-bars text-white text-xl"></i>
+  </button>
+</nav>

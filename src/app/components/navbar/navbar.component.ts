@@ -13,38 +13,24 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  items: MenuItem[] = [];
-  isScrolled: boolean = false;
+  isMenuOpen = false;
+  isScrolled = false;
 
-  ngOnInit() {
-    this.items = [
-      { label: 'Home', icon: 'pi pi-home', routerLink: '/' },
-      { label: 'Books', icon: 'pi pi-book', routerLink: '/books' },
-      {
-        label: 'Favorites',
-        icon: 'pi pi-heart',
-        command: () => {
-          this.onFavoritesClick();
-        },
-      },
-      { label: 'Contact', icon: 'pi pi-envelope', routerLink: '/contact' },
-    ];
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
+
   @HostListener('window:scroll', [])
-  onWindowScroll() {
-    this.isScrolled = window.scrollY > 0;
+  onScroll() {
+    this.isScrolled = window.scrollY > 50;
   }
+
+  scrollToSection(id: string) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+
   onFavoritesClick() {
-    const event = new CustomEvent('open-favorites-dialog');
-    window.dispatchEvent(event);
+    window.dispatchEvent(new Event('open-favorites-dialog'));
   }
-
-scrollToSection(id: string) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
-
-
 }

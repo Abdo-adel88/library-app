@@ -1,37 +1,28 @@
-<div class="flex gap-6 p-2 text-left max-h-[500px]">
+<div
+  class="book-details-wrapper gap-6 p-2 text-left max-h-[500px]"
+  [ngClass]="{ 'flex-col': isMobileView }"
+>
   <!-- الصورة -->
-  <div class="min-w-[220px] max-w-[220px]">
+  <div class="book-cover min-w-[220px] max-w-[220px]">
     <img
       *ngIf="book?.cover_id"
       [src]="'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'"
       alt="{{ book?.title }}"
       class="rounded shadow-md w-full h-[300px] object-contain"
+      [ngClass]="{ 'h-300': isMobileView }"
     />
   </div>
 
   <!-- التفاصيل -->
-  <div class="flex-1 pr-2 space-y-3 overflow-y-auto max-h-[500px]">
+  <div class="book-info flex-1 pr-2 space-y-3 overflow-y-auto max-h-[500px]">
     <h2 class="text-2xl font-bold text-darkred">{{ book?.title }}</h2>
-
-    <p>
-      <strong class="text-[#cc9600]">Author:</strong>
-      {{ book?.authorName || "Unknown" }}
-    </p>
-
-    <p>
-      <strong class="text-[#cc9600]">Edition Count:</strong>
-      {{ book?.edition_count || "-" }}
-    </p>
-    <p *ngIf="book?.first_publish_year">
-      <strong class="text-[#cc9600]">First Published:</strong>
-      {{ book?.first_publish_year }}
-    </p>
+    <p><strong class="text-[#cc9600]">Author:</strong> {{ book?.authorName || 'Unknown' }}</p>
+    <p><strong class="text-[#cc9600]">Edition Count:</strong> {{ book?.edition_count || '-' }}</p>
+    <p *ngIf="book?.first_publish_year"><strong class="text-[#cc9600]">First Published:</strong> {{ book?.first_publish_year }}</p>
 
     <div *ngIf="book?.description">
       <strong class="text-[#cc9600]">Description:</strong>
-      <p class="text-sm text-[#eeeeee] leading-relaxed">
-        {{ book?.description?.value || book?.description }}
-      </p>
+      <p class="text-sm text-[#eeeeee] leading-relaxed">{{ book?.description?.value || book?.description }}</p>
     </div>
 
     <div *ngIf="book?.subjects?.length">

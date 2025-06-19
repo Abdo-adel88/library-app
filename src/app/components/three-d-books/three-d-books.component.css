@@ -18,6 +18,7 @@
   text-align: center;
   width: 100%;
   padding: 2rem;
+  overflow: hidden;
 }
 
 .section-title {
@@ -36,7 +37,7 @@
   justify-content: center;
   align-items: end;
 
-height:  432px;
+  height: 432px;
 }
 
 .book-card {
@@ -138,5 +139,116 @@ height:  432px;
 
   to {
     left: -100%;
+  }
+}
+/* Tablet (<=768px) */
+@media (max-width: 768px) {
+  .box .inner {
+    width: 300px;
+    height: 150px;
+    font-size: 2.5em;
+    line-height: 150px;
+  }
+
+  .carousel-track {
+    height: 360px;
+    top: 258px;
+  }
+
+  .book-card img {
+    width: 140px;
+    height: 200px;
+  }
+
+  .book-card.center {
+    transform: translateX(0) scale(1.1);
+  }
+
+  .book-card.left {
+    transform: translateX(-180px) scale(1) rotateY(8deg);
+  }
+
+  .book-card.far-left {
+    transform: translateX(-330px) scale(0.9) rotateY(12deg);
+  }
+
+  .book-card.right {
+    transform: translateX(180px) scale(1) rotateY(-8deg);
+  }
+
+  .book-card.far-right {
+    transform: translateX(330px) scale(0.9) rotateY(-12deg);
+  }
+  .box {
+   
+    position: relative;
+    top: 148px;
+  }
+}
+
+/* Mobile (<=425px) */
+@media (max-width: 425px) {
+  .box .inner {
+    width: 250px;
+    height: 120px;
+    font-size: 2em;
+    line-height: 120px;
+  }
+
+  .carousel-track {
+    height: 300px;
+  }
+
+  .book-card img {
+    width: 110px;
+    height: 160px;
+  }
+
+  .book-card.center {
+    transform: translateX(0) scale(1.05);
+  }
+
+  .book-card img {
+    width: 140px;
+    height: 200px;
+  }
+
+  .book-card.center {
+    transform: translateX(0) scale(1.1);
+  }
+
+  .book-card.left {
+    transform: translateX(-180px) scale(1) rotateY(8deg);
+  }
+
+  .book-card.far-left {
+    transform: translateX(-330px) scale(0.9) rotateY(12deg);
+  }
+
+  .book-card.right {
+    transform: translateX(180px) scale(1) rotateY(-8deg);
+  }
+
+  .book-card.far-right {
+    transform: translateX(330px) scale(0.9) rotateY(-12deg);
+  }
+}
+
+/* Mobile small (<=375px) */
+@media (max-width: 375px) {
+  .box .inner {
+    width: 200px;
+    height: 100px;
+    font-size: 1.5em;
+    line-height: 100px;
+  }
+
+  .carousel-track {
+    height: 260px;
+  }
+
+  .book-card img {
+    width: 100px;
+    height: 150px;
   }
 }

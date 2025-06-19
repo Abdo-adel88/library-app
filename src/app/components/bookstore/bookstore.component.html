@@ -2,7 +2,7 @@
   Explore All Books Here
 </h2>
 
-<div class="flex justify-content-center flex-wrap items-center gap-4 mt-6 mb-3">
+<div class="flex justify-content-center flex-wrap items-center gap-4 mt-6 mb-3 p-1">
   @for (option of categoryOptions; track option.value) {
     <div class="flex items-center">
       <p-radioButton
@@ -65,12 +65,12 @@
   }
 
   @if (displayedBooks().length === 0) {
-    <div class="text-center my-8 col-span-full">
+    <div class="text-center block my-8 col-span-full">
       <h3 class="text-2xl font-bold text-[#cc0000] mb-4">No books found</h3>
       <img
         src="https://img.freepik.com/free-vector/error-404-concept-illustration_114360-1811.jpg?ga=GA1.1.356167453.1722170400&semt=ais_hybrid&w=740"
         alt="Not Found"
-        class="max-w-[350px] mx-auto rounded-lg shadow-lg"
+          class="no-books-img"
       />
     </div>
   }
@@ -81,6 +81,7 @@
   [totalRecords]="totalRecords()"
   (onPageChange)="onPageChange($event)"
   *ngIf="totalRecords() > 0"
+   [showFirstLastIcon]="false"
   styleClass="mt-4"
 />
 

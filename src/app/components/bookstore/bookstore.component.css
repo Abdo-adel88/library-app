@@ -35,7 +35,7 @@ h2 {
   height: 1.2rem;
 }
 ::ng-deep .p-button {
- background-color: darkred;
+  background-color: darkred;
   color: #ffffff;
   border-radius: 6px;
   font-weight: bold;
@@ -45,11 +45,11 @@ h2 {
   background-color: rgb(214, 0, 0); /* لون أفتح عند التمرير */
 }
 ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background: #ad0000;
-    border-color: #EFF6FF;
-    color: #ffffff;
+  background: #ad0000;
+  border-color: #eff6ff;
+  color: #ffffff;
 }
-.lable{
+.lable {
   color: #000000;
   font-weight: bold;
   font-size: 1.2rem;
@@ -69,15 +69,189 @@ h2 {
 }
 .w-input {
   width: 100%;
-
 }
 /* bookstore.component.css */
 .text-center h3 {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   color: darkred;
 }
 
 ::ng-deep .p-card .p-component {
-cursor: pointer !important;
+  cursor: pointer !important;
+}
+.no-books-img {
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+  margin-inline: auto;
+  display: block;
+  border-radius: 8px;
+}
 
+/* 🔶 Tablet (768px) */
+@media (max-width: 768px) {
+  .no-books-img {
+    max-width: 500px;
+  }
+  .search-input {
+    min-width: 79%;
+    font-size: 0.9rem;
+  }
+
+  .lable {
+    font-size: 1rem;
+  }
+
+  ::ng-deep .p-card {
+    height: auto !important;
+    margin: auto;
+  }
+
+  .img-cover {
+    height: 200px;
+  }
+}
+
+/* 🔹 Mobile (425px) */
+@media (max-width: 425px) {
+  .no-books-img {
+    max-width: 400px;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  ::ng-deep .p-card .p-element {
+    display: block;
+    width: 435px;
+  }
+ 
+  ::ng-deep .p-element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 62%;
+  }
+  .ng-star-inserted {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: auto;
+  }
+
+  .search-input {
+    min-width: 80%;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+
+  .lable {
+    font-size: 0.9rem;
+  }
+
+  .img-cover {
+    height: 180px;
+  }
+  ::ng-deep .p-card {
+    width: 95vw !important;
+    margin-bottom: 1.5rem;
+  }
+  .flex-wrap.grid-cols-4 {
+      display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 62%;
+    margin: auto;
+  }
+
+  ::ng-deep .p-card {
+    width: 435px !important;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .overflow-hidden {
+    overflow-x: auto;
+  }
+}
+
+/* 🔸 Mobile small (375px) */
+@media (max-width: 375px) {
+  .no-books-img {
+    max-width: 240px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .search-input {
+    font-size: 0.8rem;
+    padding: 5px 8px;
+  }
+
+  .lable {
+    font-size: 0.85rem;
+  }
+
+  .img-cover {
+    height: 160px;
+  }
+
+  ::ng-deep .p-button {
+    font-size: 0.8rem;
+  }
+}
+/* 🔶 Tablet (768px) */
+@media (max-width: 768px) {
+  ::ng-deep .p-paginator {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  ::ng-deep .p-paginator .p-paginator-page,
+  ::ng-deep .p-paginator .p-paginator-next,
+  ::ng-deep .p-paginator .p-paginator-prev {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* 🔹 Mobile (max-width: 425px) */
+@media (max-width: 425px) {
+  ::ng-deep .p-paginator {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  ::ng-deep .p-paginator .p-paginator-pages {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  ::ng-deep .p-paginator .p-paginator-page {
+    margin: 0.2rem;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  ::ng-deep .p-paginator .p-paginator-next,
+  ::ng-deep .p-paginator .p-paginator-prev {
+    font-size: 0.9rem;
+  }
+}
+
+/* 🔸 Mobile small (375px) */
+@media (max-width: 375px) {
+  ::ng-deep .p-paginator .p-paginator-page {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  ::ng-deep .p-paginator {
+    padding: 0.3rem;
+  }
 }
