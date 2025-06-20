@@ -118,10 +118,17 @@ fetchBooks(subject: string, signalTarget: any, callback?: () => void): void {
     this.page.set(0);
   }
 
-  onPageChange(event: any): void {
-    this.page.set(event.page);
-    this.rows.set(event.rows);
+onPageChange(event: any): void {
+  this.page.set(event.page);
+  this.rows.set(event.rows);
+
+  // ✅ Scroll لأعلى الـ component
+  const el = document.getElementById('bookstore-top');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+}
+
 
   getShortTitle(title: string): string {
     if (!title) return 'Untitled';

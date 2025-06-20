@@ -1,0 +1,6 @@
+@media screen and (max-width: 425px) {
+  ::ng-deep .p-toast-message {
+    transform: translateX(105px) !important;
+    /* transform: translateY(-100px) !important; */
+  }
+}

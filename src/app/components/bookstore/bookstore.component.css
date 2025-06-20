@@ -124,6 +124,23 @@ h2 {
     display: block;
     width: 435px;
   }
+ .paginator-w{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  ::ng-deep .p-paginator {
+    width: 100%;
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+  ::ng-deep .p-paginator .p-paginator-page,
+  ::ng-deep .p-paginator .p-paginator-next,
+  ::ng-deep .p-paginator .p-paginator-prev {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
  
   ::ng-deep .p-element {
     display: flex;

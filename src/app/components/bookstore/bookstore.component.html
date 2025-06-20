@@ -1,7 +1,8 @@
+<div id="bookstore-top">
 <h2 class="text-3xl font-bold text-center text-[#00ADB5] my-4">
   Explore All Books Here
 </h2>
-
+</div>
 <div class="flex justify-content-center flex-wrap items-center gap-4 mt-6 mb-3 p-1">
   @for (option of categoryOptions; track option.value) {
     <div class="flex items-center">
@@ -83,6 +84,7 @@
   *ngIf="totalRecords() > 0"
    [showFirstLastIcon]="false"
   styleClass="mt-4"
+  class="paginator-w"
 />
 
 <p-dialog
