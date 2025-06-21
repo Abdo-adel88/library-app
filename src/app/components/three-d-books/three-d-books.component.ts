@@ -3,18 +3,18 @@ import { CommonModule } from '@angular/common';
 import { BookService } from '../../services/book.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { interval } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 @Component({
   selector: 'app-three-d-books',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent,HttpClientTestingModule],
   templateUrl: './three-d-books.component.html',
   styleUrls: ['./three-d-books.component.css'],
 })
 export class ThreeDBooksComponent implements OnInit {
   private bookService = inject(BookService);
 
-  // ✅ Signals
   romanceBooks = signal<any[]>([]);
   activeIndex = signal(0);
 
@@ -23,7 +23,6 @@ export class ThreeDBooksComponent implements OnInit {
       this.romanceBooks.set(res.works || []);
     });
 
-    // ✅ auto-advance activeIndex every 3 seconds using RxJS
     interval(3000).subscribe(() => {
       const total = this.romanceBooks().length;
       if (total > 0) {
@@ -32,7 +31,6 @@ export class ThreeDBooksComponent implements OnInit {
     });
   }
 
-  // ✅ computed visible books
   visibleBooks = computed(() => {
     const books = this.romanceBooks();
     const index = this.activeIndex();
@@ -48,7 +46,6 @@ export class ThreeDBooksComponent implements OnInit {
     return result;
   });
 
-  // ✅ unchanged helper
   getPositionClass(index: number): string {
     switch (index) {
       case 0: return 'far-left';

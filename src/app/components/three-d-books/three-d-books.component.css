@@ -27,7 +27,6 @@
   font-size: 2rem;
 }
 
-/* Carousel Layout */
 .carousel-track {
   position: relative;
   width: 100%;
@@ -56,7 +55,6 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
-/* Positioning */
 .book-card.center {
   transform: translateX(0) scale(1.2);
   z-index: 5;
@@ -141,7 +139,6 @@
     left: -100%;
   }
 }
-/* Tablet (<=768px) */
 @media (max-width: 768px) {
   .box .inner {
     width: 300px;
@@ -186,7 +183,6 @@
   }
 }
 
-/* Mobile (<=425px) */
 @media (max-width: 425px) {
   .box .inner {
     width: 250px;
@@ -234,7 +230,6 @@
   }
 }
 
-/* Mobile small (<=375px) */
 @media (max-width: 375px) {
   .box .inner {
     width: 200px;

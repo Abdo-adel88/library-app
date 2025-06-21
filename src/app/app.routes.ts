@@ -12,7 +12,7 @@ export const routes: Routes = [
     path: 'books',
     loadComponent: () =>
       import('./components/bookstore/bookstore.component').then(
-        (m) => m.BookStoreComponent
+        (m) => m.BookstoreComponent
       ),
   },
   {

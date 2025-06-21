@@ -5,7 +5,7 @@ import {
   HostListener,
   signal,
   computed,
-  effect,
+  
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../../services/book.service';
@@ -18,6 +18,7 @@ import { DetailsBookComponent } from '../details-book/details-book.component';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
 import { FavoritesBookComponent } from '../favorites-book/favorites-book.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 @Component({
   selector: 'app-book-store',
@@ -32,12 +33,14 @@ import { FavoritesBookComponent } from '../favorites-book/favorites-book.compone
     DialogModule,
     DetailsBookComponent,
     FavoritesBookComponent,
+    HttpClientTestingModule,
+    
   ],
   templateUrl: './bookstore.component.html',
   styleUrls: ['./bookstore.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BookStoreComponent implements OnInit {
+export class BookstoreComponent implements OnInit {
   allBooks = signal<any[]>([]);
   romanceBooks = signal<any[]>([]);
   kidsBooks = signal<any[]>([]);
@@ -52,7 +55,7 @@ export class BookStoreComponent implements OnInit {
   rows = signal(8);
   yourFavoritesList = signal<any[]>([]);
 
-  // ✅ computed
+  
   totalRecords = computed(() => this.filteredBooks().length);
   displayedBooks = computed(() => {
     const start = this.page() * this.rows();
@@ -122,7 +125,7 @@ onPageChange(event: any): void {
   this.page.set(event.page);
   this.rows.set(event.rows);
 
-  // ✅ Scroll لأعلى الـ component
+  
   const el = document.getElementById('bookstore-top');
   if (el) {
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });

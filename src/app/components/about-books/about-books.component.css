@@ -1,5 +1,5 @@
 .about-section {
-  background-color: #000000; /* خلفية داكنة جدًا */
+  background-color: #000000; 
   color: #f8f8f8;
   font-family: 'Segoe UI', sans-serif;
   padding: 0;
@@ -81,21 +81,19 @@
   font-size: 1rem;
 }
 h1, h2, h3 {
-  color: darkred !important; /* لون العناوين */
+  color: darkred !important; 
 }
 h4{
-    color: white !important; /* لون العناوين الفرعية */
+    color: white !important; 
 }
 .wave-top {
 
   overflow: hidden;
-  margin-bottom: -13px; /* يزيل أي فجوة بين الموجة والبداية */
+  margin-bottom: -13px; 
 }
 
 
-/* 🌐 Responsive Design */
 
-/* 🔶 Tablet - max-width: 768px */
 @media (max-width: 768px) {
   .about-banner {
     height: 380px;
@@ -128,7 +126,7 @@ h4{
   }
 }
 
-/* 🔹 Mobile - max-width: 425px */
+
 @media (max-width: 425px) {
   .about-banner {
     height: 280px;
@@ -159,7 +157,7 @@ h4{
   }
 }
 
-/* 🔸 Mobile Small - max-width: 375px */
+
 @media (max-width: 375px) {
   .about-banner {
     height: 240px;

@@ -7,7 +7,7 @@ h2 {
 }
 
 .text-sm {
-  color: #dcdcdc; /* رمادي فاتح */
+  color: #dcdcdc; 
 }
 
 .p-card .p-card-header {
@@ -42,7 +42,7 @@ h2 {
   border: none;
 }
 ::ng-deep .p-button:hover {
-  background-color: rgb(214, 0, 0); /* لون أفتح عند التمرير */
+  background-color: rgb(214, 0, 0); 
 }
 ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
   background: #ad0000;
@@ -70,7 +70,7 @@ h2 {
 .w-input {
   width: 100%;
 }
-/* bookstore.component.css */
+
 .text-center h3 {
   font-family: "Segoe UI", sans-serif;
   color: darkred;
@@ -88,7 +88,7 @@ h2 {
   border-radius: 8px;
 }
 
-/* 🔶 Tablet (768px) */
+
 @media (max-width: 768px) {
   .no-books-img {
     max-width: 500px;
@@ -112,7 +112,7 @@ h2 {
   }
 }
 
-/* 🔹 Mobile (425px) */
+
 @media (max-width: 425px) {
   .no-books-img {
     max-width: 400px;
@@ -191,7 +191,7 @@ h2 {
   }
 }
 
-/* 🔸 Mobile small (375px) */
+
 @media (max-width: 375px) {
   .no-books-img {
     max-width: 240px;
@@ -218,7 +218,6 @@ h2 {
     font-size: 0.8rem;
   }
 }
-/* 🔶 Tablet (768px) */
 @media (max-width: 768px) {
   ::ng-deep .p-paginator {
     flex-wrap: wrap;
@@ -235,7 +234,6 @@ h2 {
   }
 }
 
-/* 🔹 Mobile (max-width: 425px) */
 @media (max-width: 425px) {
   ::ng-deep .p-paginator {
     flex-direction: column;
@@ -261,7 +259,6 @@ h2 {
   }
 }
 
-/* 🔸 Mobile small (375px) */
 @media (max-width: 375px) {
   ::ng-deep .p-paginator .p-paginator-page {
     font-size: 0.75rem;

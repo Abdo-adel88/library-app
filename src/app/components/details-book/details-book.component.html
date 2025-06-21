@@ -2,7 +2,6 @@
   class="book-details-wrapper gap-6 p-2 text-left max-h-[500px]"
   [ngClass]="{ 'flex-col': isMobileView }"
 >
-  <!-- الصورة -->
   <div class="book-cover min-w-[220px] max-w-[220px]">
     <img
       *ngIf="book?.cover_id"
@@ -13,7 +12,6 @@
     />
   </div>
 
-  <!-- التفاصيل -->
   <div class="book-info flex-1 pr-2 space-y-3 overflow-y-auto max-h-[500px]">
     <h2 class="text-2xl font-bold text-darkred">{{ book?.title }}</h2>
     <p><strong class="text-[#cc9600]">Author:</strong> {{ book?.authorName || 'Unknown' }}</p>

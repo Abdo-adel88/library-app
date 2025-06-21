@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BookstoreComponent } from './bookstore.component';
+import { MessageService } from 'primeng/api';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { BookService } from '../../services/book.service';
+
 
 describe('BookstoreComponent', () => {
   let component: BookstoreComponent;
@@ -8,7 +12,8 @@ describe('BookstoreComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BookstoreComponent]
+      imports: [BookstoreComponent,HttpClientTestingModule],
+       providers: [MessageService,BookService]
     })
     .compileComponents();
     

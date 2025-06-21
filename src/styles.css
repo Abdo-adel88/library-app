@@ -3,13 +3,13 @@
 body {
   margin: 0;
   background-color: rgb(245, 245, 220);
-  color: #EEEEEE; /* لون النص الأساسي */
+  color: #EEEEEE; 
   background: #ffffff;
 }
 
 
 h1, h2, h3, h4, h5, h6 {
-  color: darkred; /* لون العناوين */
+  color: darkred; 
   margin: 0.5rem 0;
 }
 

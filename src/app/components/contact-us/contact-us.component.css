@@ -33,7 +33,7 @@
 }
 
 .contact-form h2 span {
-  color: #8b0000; /* darkred */
+  color: #8b0000; 
 }
 
 .contact-form h3 {
@@ -89,9 +89,8 @@
 .wave-top {
 
   overflow: hidden;
-  margin-bottom: -13px; /* يزيل أي فجوة بين الموجة والبداية */
+  margin-bottom: -13px; 
 }
-/* 🔶 Tablet (768px) */
 @media (max-width: 768px) {
   .contact-container {
     padding: 20px;
@@ -123,7 +122,6 @@
   }
 }
 
-/* 🔹 Mobile (max-width: 425px) */
 @media (max-width: 425px) {
   .contact-form h2 {
     font-size: 1.7rem;
@@ -153,7 +151,6 @@
   }
 }
 
-/* 🔸 Mobile small (375px) */
 @media (max-width: 375px) {
   .contact-form h2 {
     font-size: 1.5rem;

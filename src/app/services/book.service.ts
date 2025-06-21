@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class BookService {
   constructor(private http: HttpClient) {
-    console.log();
     
   }
 

@@ -2,7 +2,6 @@ import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
-import { MenuItem } from 'primeng/api';
 import { RouterModule } from '@angular/router';
 
 @Component({

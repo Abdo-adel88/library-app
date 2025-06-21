@@ -19,7 +19,6 @@ import { ButtonModule } from 'primeng/button';
   styleUrls: ['./favorites-book.component.css'],
 })
 export class FavoritesBookComponent {
-  // ✅ Signal-based Input
   private _favoriteBooks = signal<any[]>([]);
   @Input() set favoriteBooks(value: any[]) {
     this._favoriteBooks.set(value || []);
@@ -28,7 +27,6 @@ export class FavoritesBookComponent {
     return this._favoriteBooks();
   }
 
-  // ✅ Emits stay as EventEmitters
   @Output() remove = new EventEmitter<any>();
   @Output() openDetails = new EventEmitter<any>();
 
@@ -40,6 +38,5 @@ export class FavoritesBookComponent {
     this.openDetails.emit(book);
   }
 
-  // Optional: computed if needed later
   booksCount = computed(() => this._favoriteBooks().length);
 }
