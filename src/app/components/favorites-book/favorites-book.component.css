@@ -87,7 +87,7 @@
   .no-books-img {
     max-width: 280px;
   }
-    ::ng-deep .p-dialog-header {
+  ::ng-deep .p-dialog-header {
     width: 100% !important;
   }
 }
@@ -101,6 +101,10 @@
   .book-card {
     max-width: 90vw;
   }
+  .img-cover {
+    width: 60%;
+    margin: auto;
+  }
 
   .no-books-img {
     max-width: 250px;
@@ -108,6 +112,12 @@
   ::ng-deep .p-dialog-header {
     width: 100% !important;
   }
+  /* ::ng-deep .p-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  } */
   ::ng-deep .p-ripple {
     width: 30px !important;
   }
