@@ -17,7 +17,7 @@
             <div class="book-card" [ngClass]="getPositionClass($index)">
               <img
                 [src]="'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'"
-                [alt]="book.title || 'Book Cover'"
+                [alt]="book.title || 'Book Cover'" loading="lazy"
               />
               <p class="author">{{ book.authors?.[0]?.name || 'Unknown' }}</p>
             </div>

@@ -8,7 +8,7 @@
       [src]="'https://covers.openlibrary.org/b/id/' + book.cover_id + '-L.jpg'"
       alt="{{ book?.title }}"
       class="rounded shadow-md w-full h-[300px] object-contain"
-      [ngClass]="{ 'h-300': isMobileView }"
+      [ngClass]="{ 'h-300': isMobileView }" loading="lazy"
     />
   </div>
 

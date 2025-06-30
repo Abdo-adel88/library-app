@@ -30,10 +30,10 @@ export const routes: Routes = [
       ),
   },
   {
-    path: '3d-books',
+    path: 'footer',
     loadComponent: () =>
-      import('./components/three-d-books/three-d-books.component').then(
-        (m) => m.ThreeDBooksComponent
+      import('./components/footer-books/footer-books.component').then(
+        (m) => m.FooterBooksComponent
       ),
   },
 ];
